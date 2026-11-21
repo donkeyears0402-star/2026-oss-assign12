@@ -9,7 +9,11 @@ export default function Lab1EffectTimer() {
     const timerId = setInterval(() => {
       setCount(prev => prev + 1);
     }, 1000);
-    console.log('[LAB 1] timer', timerId);
+
+    return () => {
+      clearInterval(timerId);
+      console.log('[LAB 1] cleanup');
+    };
   }, []);
 
   return (
