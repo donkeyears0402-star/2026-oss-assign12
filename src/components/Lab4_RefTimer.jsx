@@ -7,6 +7,8 @@ export default function Lab4RefTimer() {
   const timerRef = useRef(null);
 
   const start = () => {
+    if (timerRef.current) return;
+
     timerRef.current = setInterval(() => {
       setCount(prev => prev + 1);
     }, 1000);
