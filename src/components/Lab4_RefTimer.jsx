@@ -1,5 +1,11 @@
 import { useEffect, useRef, useState } from 'react';
 
+function formatTime(seconds) {
+  const minutes = String(Math.floor(seconds / 60)).padStart(2, '0');
+  const rest = String(seconds % 60).padStart(2, '0');
+  return `${minutes}:${rest}`;
+}
+
 // LAB 4 (Slide 17): Timer ID를 useRef로 관리
 export default function Lab4RefTimer() {
   const [count, setCount] = useState(0);
@@ -34,8 +40,10 @@ export default function Lab4RefTimer() {
 
   return (
     <div>
-      <p className="status">상태: {running ? 'Running' : 'Stopped'}</p>
-      <div className="count">{count}</div>
+      <p className={running ? 'status running' : 'status stopped'}>
+        상태: {running ? 'Running' : 'Stopped'}
+      </p>
+      <div className="count">{formatTime(count)}</div>
       <div className="controls">
         <button onClick={start} disabled={running}>Start</button>
         <button className="secondary" onClick={stop} disabled={!running}>Stop</button>
